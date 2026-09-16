@@ -3,15 +3,14 @@ import java.util.*;
 public class Main {
   public static int LambdaFunctiuonWithoutSorting(int arr[]){
     //rather than sorting with choosed this so we taking out the largest 
-    int largest= Arrays.stream(arr)                      
-                 .max()                               // Largest int Array
-                 .getAsInt();
-
+   int largest = Arrays.stream(arr)
+                        .max()                   //getting Max here
+                        .getAsInt();
 
     return Arrays.stream(arr)
-           .filter(x -> x < largest)                  //Comparing with Largest in Array
-           .max()                                     //
-           .getAsInt();
+                 .filter(x -> x < largest)           // filtering data smaller than largest
+                 .max()
+                 .orElse(-1);                        // to handle if all element are same 
   }
 
   // lambda function here took            TC:O(N log n)    and   SC:O(N)
@@ -22,14 +21,24 @@ public class Main {
           .sorted(Collections.reverseOrder())          //sorted and reversed   
           .skip(1)                                      // skiped largest
           .findFirst()
-          .get();
+         .orElse(-1);
   }
 
   // Sorting function here took            TC:O(N log n)    and   SC:O(N)
   public static int Sorting(int arr[]){                 // we used Sorting here 
+     Arrays.sort(arr);
+
     int n = arr.length;
-    Arrays.sort(arr); 
-    return arr[n-2];
+
+    for (int i = n - 2; i >= 0; i--) {
+
+        if (arr[i] != arr[n - 1]) {
+            return arr[i];
+        }
+    }
+
+    System.out.println("Second largest does not exist");
+    return -1;
   }
 
 
@@ -47,6 +56,10 @@ public class Main {
       }else if(arr[i]> secondLargest && arr[i]!= largest){
         secondLargest= arr[i];
       }
+    }
+    if(secondLargest==Integer.MIN_VALUE){                        // If Arrays has All Elemnt same or Array is with only 1 elemnt
+      System.out.println("Second Highest Doesn't exists");
+      return -1;
     }
     return secondLargest;
   }
