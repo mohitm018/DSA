@@ -4,6 +4,12 @@
 import java.util.*;
 public class Main {
 
+  //By using max()
+  public static int maxByLambda(int arr[]){
+    return Arrays.stream(arr)
+                 .max()
+                 .getAsInt();
+  }
   // TC:O(n^2)  SC:O(1) 
   public static int Java8FUnction(int arr[]){
 
@@ -38,7 +44,7 @@ public class Main {
   //First basic Normal LOOP with TC:O(N) & SC:(1)
   public static int largestElement(int arr[]){
     int n = arr.length;
-    int max= arr[0];
+    int max= Integer.MIN_VALUE;
     for(int i =1;i<n;i++){
       if(arr[i]>max){
         max=arr[i];
@@ -49,10 +55,11 @@ public class Main {
   public static void main(String[] args) {
       System.out.println("Hello, World!");
       int arr[]={10,25,7,45,18};
-      // System.out.println(largestElement(arr));    //-->TC:O(N) SC:O(1)
-      // System.out.print(withSort(arr));             //-->TC:O(N log N) SC:O(log N)
-      // System.out.print(LambdaFunction(arr));       //-->TC:O(N) SC:O(1)
-      // System.out.println(Java8FUnction(arr));      //-->TC:O(N^2) SC:O(1)
+      //System.out.println("Max element by lambda by max(): "+maxByLambda(arr))      //Tc:O(N)            Sc:O(1)
+      // System.out.println(largestElement(arr));                                    //-->TC:O(N)         SC:O(1)
+      // System.out.print(withSort(arr));                                            //-->TC:O(N log N)   SC:O(log N)
+      // System.out.print(LambdaFunction(arr));                                      //-->TC:O(N)         SC:O(1)
+      // System.out.println(Java8FUnction(arr));                                     //-->TC:O(N^2)       SC:O(1)
 
 
 
